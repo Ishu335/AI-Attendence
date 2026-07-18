@@ -1,0 +1,27 @@
+numpy 
+pandas
+# Face Recognition 
+scikit-learn # For SVM
+
+dlib-bin # For face detection and recognition
+git+https://github.com/ageitgey/face_recognition_models # For face recognition models
+# face_recognition
+setuptools # For installing  face_recognition models for compatibility with python
+# A separate lightweight window that behaves like a browser but stays next to VS Code?
+#database
+supabase # For Supabase database interaction
+
+bcrypt # For password hashing
+segno # For JWT token generation and verification and generate QR 
+pillow # For image processing
+streamlit # For building the web application
+
+
+#for Voice Pipeline
+librosa # For audio processing
+resemblyzer # For voice embedding and speaker recognition
+
+
+# moden model 
+insightface==0.7.3
+onnxruntime==1.22.1
