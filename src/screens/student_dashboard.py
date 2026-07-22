@@ -30,6 +30,7 @@ def student_dashboard():
     with c2:
         if st.button('Enroll in Subject',type='primary',width='stretch'):
             enroll_dialog()
+    
             
     st.divider()
     logs={}
@@ -59,7 +60,7 @@ def student_dashboard():
             if st.button("Unenroll This Course",width='content', key=f"unenroll_{sid}"):
                 unenroll_student_to_subject(student_id,sid)
                 st.toast('Unenroll Successfully')
-                time.sleep(1)
+                time.sleep(0.7)
                 st.rerun()
 
                 
@@ -72,4 +73,5 @@ def student_dashboard():
                              ('✔️','Attended',stats['attended']),
                          ],
                         footer_callback=unenroll_btn)
+            # st.rerun()
     

@@ -1,8 +1,8 @@
-from resemblyzer import VoiceEncoder,preprocess_wav
+from resemblyzer import VoiceEncoder,preprocess_wav #type:ignore
 import numpy as np
 import io
-import librosa
-import streamlit as st 
+import librosa #type:ignore
+import streamlit as st  # type:ignore
 import time
 
 
@@ -40,30 +40,33 @@ def identify_speaker(new_embedding,candidates_dict,threshold=0.65):
     return  None,best_score
 
 
-def  process_bulk_audio(audio_bytes,candidates_dict,threshold=0.65):
+def process_bulk_audio(audio_bytes, candidates_dict, threshold=0.65):
     try:
-        encoder=load_voice_encoder()
-        audio,sr=librosa.load(io.BytesIO(audio_bytes),sr=16000)
-        segments=librosa.effects.split(audio,top_db=30)
-         
-        identify_results=[]
+        encoder = load_voice_encoder()
+        audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
+        segments = librosa.effects.split(audio, top_db=30)
 
-        for start ,end in segments:
-            if (end-start)<sr * 0.5:
+        identify_results = {}
+
+        for start, end in segments:
+            if (end - start) < sr * 0.5:
                 continue
-            segment_audio=audio[start:end]
-            wav=preprocess_wav(segment_audio)
-            embedding =encoder.embed_utterance(wav)
 
-            sid,score=identify_speaker(embedding,candidates_dict,threshold)
+            segment_audio = audio[start:end]
+            wav = preprocess_wav(segment_audio)
+            embedding = encoder.embed_utterance(wav)
+
+            sid, score = identify_speaker(embedding, candidates_dict, threshold)
+
             if sid:
-                if sid not in identify_speaker or score >identify_results[sid]:
-                    identify_results[sid]=score
-                return identify_results
+                if sid not in identify_results or score > identify_results[sid]:
+                    identify_results[sid] = score
 
-    except   Exception as e:
-        st.error("Bulk process Error")
-        return
+        return identify_results   # Always returns a dictionary
+
+    except Exception as e:
+        st.write("Bulk process Error:", e)
+        return {}
 
 
 
