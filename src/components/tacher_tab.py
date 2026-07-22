@@ -11,13 +11,9 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 
+
 def tacher_tab_atake_attendance():
     st.header("TAKE AI ATTENDANCE")
-
-import numpy as np
-
-import numpy as np
-
 def recognize_student(face_embedding, enrolled_students, threshold=0.6):
     face_embedding = np.asarray(face_embedding, dtype=np.float32).flatten()
 
@@ -45,7 +41,6 @@ def recognize_student(face_embedding, enrolled_students, threshold=0.6):
 
     if best_distance < threshold:
         return best_id
-
     return None
 
 
@@ -118,81 +113,85 @@ def tacher_tab_attendance_records():
         for idex,img in enumerate(st.session_state.attendance_images):
             with gallery_cols[idex%4]:
                 st.image(img,width='stretch',caption=f'Photo{idex+1}')
+    has_photos=bool(st.session_state.attendance_images)
+    c1,c2,c3=st.columns(3)
+    with c1:
+        if st.button('Clear all photos',width='content',type='tertiary',icon=':material/delete:',disabled=not has_photos):
+            st.session_state.attendance_images=[]
+            st.rerun()
+    
+    with c2:
         
-        c1,c2,c3=st.columns(3)
-        with c1:
-            if st.button('Clear all photos',width='content',type='tertiary',icon=':material/delete:'):
-                st.session_state.attendance_images=[]
-                st.rerun()
-        
-        with c2:
-            has_photos=bool(st.session_state.attendance_images)
-            enrolled_res = (
+        enrolled_res = (
+                supabase.table("subject_students")
+                .select("*,students(*)")
+                .eq("subject_id", select_subject_id)
+                .execute()
+            )
+        enrolled_students = enrolled_res.data
+        # print("Enrolled Students: ",enrolled_students,"\n")
+
+        if st.button("Run Face Analysis",width='stretch',icon=":material/analytics:",disabled=not has_photos):
+            with st.spinner("Scanning Classroom Images..."):
+
+                all_detected_id = {}
+
+                # Analyze ALL images
+                for idx, img in enumerate(st.session_state.attendance_images):
+
+                    img_np = np.array(img.convert("RGB"))
+
+                    detected, _ = predict_attendance(img_np, check_face(img_np))
+
+                    if detected:
+                        for student_id in detected.keys():
+                            student_id = int(student_id)
+                            all_detected_id.setdefault(student_id, []).append(f"Photo {idx+1}")
+
+                # Fetch students AFTER processing every image
+                enrolled_res = (
                     supabase.table("subject_students")
                     .select("*,students(*)")
                     .eq("subject_id", select_subject_id)
                     .execute()
                 )
-            enrolled_students = enrolled_res.data
-            # print("Enrolled Students: ",enrolled_students,"\n")
 
-            if st.button("Run Face Analysis"):
-                with st.spinner("Scanning Classroom Images..."):
+                enrolled_students = enrolled_res.data
 
-                    all_detected_id = {}
+                # Generate attendance
+                results = []
+                attendance_to_logs = []
 
-                    # Analyze ALL images
-                    for idx, img in enumerate(st.session_state.attendance_images):
+                current_timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
-                        img_np = np.array(img.convert("RGB"))
+                for node in enrolled_students:
+                    student = node["students"]
 
-                        detected, _ = predict_attendance(img_np, check_face(img_np))
+                    sources = all_detected_id.get(int(student["student_id"]), [])
 
-                        if detected:
-                            for student_id in detected.keys():
-                                student_id = int(student_id)
-                                all_detected_id.setdefault(student_id, []).append(f"Photo {idx+1}")
+                    is_present = len(sources) > 0
 
-                    # Fetch students AFTER processing every image
-                    enrolled_res = (
-                        supabase.table("subject_students")
-                        .select("*,students(*)")
-                        .eq("subject_id", select_subject_id)
-                        .execute()
-                    )
+                    results.append({
+                        "Name": student["name"],
+                        "ID": student["student_id"],
+                        "Source": ", ".join(sources) if sources else "_",
+                        "Status": "✔️ Present" if is_present else "❌ Absent",
+                    })
+                    attendance_to_logs.append({
+                        "student_id": student["student_id"],
+                        "subject_id": select_subject_id,
+                        "timestamp": current_timestamp,
+                        "is_present": is_present,
+                    })
 
-                    enrolled_students = enrolled_res.data
+                if results:
+                    attendace_result_dialog(pd.DataFrame(results), attendance_to_logs)
 
-                    # Generate attendance
-                    results = []
-                    attendance_to_logs = []
-
-                    current_timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-
-                    for node in enrolled_students:
-                        student = node["students"]
-
-                        sources = all_detected_id.get(int(student["student_id"]), [])
-
-                        is_present = len(sources) > 0
-
-                        results.append({
-                            "Name": student["name"],
-                            "ID": student["student_id"],
-                            "Source": ", ".join(sources) if sources else "_",
-                            "Status": "✔️ Present" if is_present else "❌ Absent",
-                        })
-
-                        attendance_to_logs.append({
-                            "student_id": student["student_id"],
-                            "subject_id": select_subject_id,
-                            "timestamp": current_timestamp,
-                            "is_present": is_present,
-                        })
-
-                    if results:
-                        attendace_result_dialog(pd.DataFrame(results), attendance_to_logs)
-
+    with c3:
+        if st.button('Voice Attendance',type='primary',icon=':material/mic:',width='content'):
+            from src.components.dialog_voice_attendance import voice_attendance_dialog
+            voice_attendance_dialog(select_subject_id)
+                        
 
                         
 def tacher_tab_manage_subjects():
