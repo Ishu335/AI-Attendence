@@ -5,15 +5,56 @@ from src.components.add_photos_dialog import add_photos_dialog
 from src.pipline.face_pipeline import check_face,predict_attendance
 from src.database.instance_db import supabase
 from src.components.attendace_result_dialog import attendace_result_dialog
-
+from src.database.db import get_attendance_for_teacher
 import streamlit as st #type: ignore
 import numpy as np
 from datetime import datetime
 import pandas as pd
 
+def tacher_tab_attendance_records():
+    st.header("📋 ATTENDANCE RECORD")
 
-def tacher_tab_atake_attendance():
-    st.header("TAKE AI ATTENDANCE")
+    teacher_id = st.session_state.teacher_data['teacher_id']
+    records = get_attendance_for_teacher(teacher_id)
+
+    if not records:
+        return
+
+    data = []
+    for r in records:
+        ts = r.get('timestamp')
+        data.append(
+            {
+                'ts_group': ts.split('.')[0] if ts else None,
+                'Time': datetime.fromisoformat(ts).strftime("%Y-%m-%d %I:%M %p") if ts else "N/A",
+                'Subject': r['subjects']['name'],
+                'Subject Code': r['subjects']['subject_code'],
+                'is_present': bool(r.get('is_present', False))
+            }
+        )
+
+    df = pd.DataFrame(data)
+    summary = (
+        df.groupby(['ts_group', 'Time', 'Subject', 'Subject Code'])
+        .agg(
+            Present_Count=('is_present', 'sum'),
+            Total_Count=('is_present', 'count')
+        )
+        .reset_index()
+    )
+
+    summary['Attendance Stats'] = (
+        "✔️ " + summary['Present_Count'].astype(str) +
+        " / " + summary['Total_Count'].astype(str) + " Students"
+    )
+
+    display_df = (
+        summary.sort_values(by='ts_group', ascending=False)
+        [['Time', 'Subject', 'Subject Code', 'Attendance Stats']]
+    )
+    st.dataframe(display_df, width='stretch', hide_index=True)
+
+    
 def recognize_student(face_embedding, enrolled_students, threshold=0.6):
     face_embedding = np.asarray(face_embedding, dtype=np.float32).flatten()
 
@@ -44,7 +85,10 @@ def recognize_student(face_embedding, enrolled_students, threshold=0.6):
     return None
 
 
-def tacher_tab_attendance_records():
+
+
+
+def tacher_tab_atake_attendance():
     st.markdown("""
         <style>
         .stSelectbox label {
