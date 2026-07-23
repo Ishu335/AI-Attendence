@@ -40,7 +40,7 @@ def identify_speaker(new_embedding,candidates_dict,threshold=0.65):
     return  None,best_score
 
 
-def process_bulk_audio(audio_bytes, candidates_dict, threshold=0.65):
+def process_bulk_audio(audio_bytes, candidates_dict, threshold=0.55):
     try:
         encoder = load_voice_encoder()
         audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
