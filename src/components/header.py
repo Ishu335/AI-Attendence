@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st #type:ignore
 import base64
 
 
@@ -32,7 +32,7 @@ def header_home():
     display:block;
     border-radius:20%;
     object-fit:cover;
-    border:2px solid #FEBB2F;
+    border:3px solid #FDB604;
 }
 
     .title-container{
@@ -41,16 +41,32 @@ def header_home():
         justify-content:center;
     }
 
-    .main-title{
-        color:#E0E3FF;
-        margin:0 !important;
-        padding:0 !important;
-        line-height:1;
-        font-size:4rem;
-        font-weight:700;
-        text-shadow:
-            0 0 10px rgba(224,227,255,0.5),
-            0 0 20px rgba(99,102,241,0.6);
+   .main-title{
+    margin:0;
+    padding:0;
+    line-height:1;
+    font-size:2rem;
+    font-weight:800;   /* not 850px */
+
+    white-space:nowrap;    /* Keep text on one line */
+    overflow:hidden;
+
+    background:linear-gradient(
+        90deg,
+        #60A5FA,
+        #22D3EE,
+        #A78BFA
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+    display:inline-block;
+}
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
     }
 
     .sub-title{
@@ -72,7 +88,7 @@ def header_home():
             <img src="data:image/png;base64,{logo}">
         </div>
         <div class="title-container">
-            <h1 class="main-title">Attendance</h1>
+            <h1 class="main-title">VisionVoice</h1>
             <p class="sub-title">
                 Smart Attendance Management System
             </p>
@@ -117,16 +133,26 @@ def header_dashboard():
     }
 
     .main-title{
-        color:#E0E3FF;
-        margin:0 !important;
-        padding:0 !important;
-        line-height:0.6;
-        font-size:0.3rem;
-        font-weight:500;
-        text-shadow:
-            0 0 10px rgba(224,227,255,0.5),
-            0 0 20px rgba(99,102,241,0.6);
-    }
+    margin:0 !important;
+    padding:0 !important;
+    line-height:1.1;
+
+    font-size:3rem;
+    font-weight:700;
+
+    background:linear-gradient(
+        90deg,
+        #60A5FA,
+        #22D3EE,
+        #A78BFA
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+    display:inline-block;
+}
 
     .sub-title{
         color:#C7D2FE;
@@ -147,7 +173,7 @@ def header_dashboard():
             <img src="data:image/png;base64,{logo}">
         </div>
         <div class="title-container">
-            <h1 class="main-title">Attendance</h1>
+            <h1 class="main-title">VisionVoice</h1>
             <p class="sub-title">
                 Smart Attendance Management System
             </p>

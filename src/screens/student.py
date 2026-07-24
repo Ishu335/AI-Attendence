@@ -8,7 +8,6 @@ from src.pipline.face_pipeline import get_face_embeddings,train_classifier,check
 
 from src.screens.student_dashboard import student_dashboard
 from src.pipline.voice_pipeline import get_voice_embedding
-
 import time
 import numpy as np
 from PIL import Image
@@ -87,7 +86,6 @@ def student_screen():
                 else:
                     st.info("Face not recognized!... You Might be new Student")
                     show_registration(img, num_faces)
-
 
 def show_registration(img, num_faces):
 

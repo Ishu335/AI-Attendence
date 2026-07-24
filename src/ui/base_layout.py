@@ -3,7 +3,7 @@ def style_backgroud_home():
     st.markdown("""
         <style>    
             .stApp {
-                background: #5865F2 !important
+                background: #393D3F !important
             }
            [data-testid="stColumn"] > div {
             background-color: #EBEEFD !important;
@@ -21,12 +21,15 @@ def style_base_layout():
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
     # Hide Header 
-    #MainMenu {display:none;}
+    MainMenu {display:none;}
     footer {display:none;}
-    [data-testid="stHeader"] {display:none;}
-    .block-container{
-                padding-top:1.5 rem !important;
-                }
+    [data-testid="stHeader"] 
+    {display:none;}
+
+    .block-container
+        {
+            padding-top:1.5 rem !important;
+        }
 
     h1 {
         font-family: 'Oswald', sans-serif !important;

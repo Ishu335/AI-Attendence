@@ -5,7 +5,7 @@ from src.components import subject_card
 from src.components.enroll_dialog import enroll_dialog
 from src.components.subject_card import subject_card
 from src.components.auto_enroll_dialog import auto_enroll_dialog
-
+from src.components.footer import footer_home
 
 import time
 
@@ -73,5 +73,4 @@ def student_dashboard():
                              ('✔️','Attended',stats['attended']),
                          ],
                         footer_callback=unenroll_btn)
-            # st.rerun()
-    
+    footer_home()
