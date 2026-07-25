@@ -32,7 +32,6 @@ def header_home():
     display:block;
     border-radius:20%;
     object-fit:cover;
-    border:3px solid #FDB604;
 }
 
     .title-container{
@@ -123,7 +122,6 @@ def header_dashboard():
     display:block;
     border-radius:20%;
     object-fit:cover;
-    border:2px solid #FEBB2F;
 }
 
     .title-container{
