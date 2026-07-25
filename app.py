@@ -20,7 +20,6 @@ def main():
         st.session_state.pending_join_code = join_code
         st.session_state.login_state = "student"
 
-    # Now render the correct page directly
     match st.session_state.login_state:
         case "teacher":
             teacher_screen()

@@ -1,14 +1,12 @@
 streamlit # For building the web application
 numpy 
 pandas
+
 # Face Recognition 
 scikit-learn # For SVM
-
 dlib-bin # For face detection and recognition
 
-# git+https://github.com/ageitgey/face_recognition_models # For face recognition models 
 
-# face_recognition
 setuptools # For installing  face_recognition models for compatibility with python
 # A separate lightweight window that behaves like a browser but stays next to VS Code?
 #database

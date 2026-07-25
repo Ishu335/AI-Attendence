@@ -16,7 +16,6 @@ from PIL import Image
 
 def student_screen():
     screen_start = time.perf_counter()
-
     style_base_layout()
 
     if 'student_data' in st.session_state :
@@ -86,6 +85,7 @@ def student_screen():
                 else:
                     st.info("Face not recognized!... You Might be new Student")
                     show_registration(img, num_faces)
+
 
 def show_registration(img, num_faces):
 
@@ -176,3 +176,4 @@ def show_registration(img, num_faces):
 
             else:
                 st.warning('Please enter your name !')
+

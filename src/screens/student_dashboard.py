@@ -5,7 +5,6 @@ from src.components import subject_card
 from src.components.enroll_dialog import enroll_dialog
 from src.components.subject_card import subject_card
 from src.components.auto_enroll_dialog import auto_enroll_dialog
-from src.components.footer import footer_home
 
 import time
 
@@ -60,7 +59,6 @@ def student_dashboard():
             if st.button("Unenroll This Course",width='content', key=f"unenroll_{sid}"):
                 unenroll_student_to_subject(student_id,sid)
                 st.toast('Unenroll Successfully')
-                time.sleep(0.7)
                 st.rerun()
 
                 
@@ -73,4 +71,3 @@ def student_dashboard():
                              ('✔️','Attended',stats['attended']),
                          ],
                         footer_callback=unenroll_btn)
-    footer_home()

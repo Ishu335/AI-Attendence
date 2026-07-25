@@ -13,8 +13,7 @@ def  footer_home():
         justify-content:center;
         align-items:center;
         gap:10px;
-        background:#393d3f;
-        border:3px solid #FFB607;
+        border:1px solid white;
         backdrop-filter:blur(12px);
         overflow:hidden;
     }

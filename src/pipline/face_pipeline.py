@@ -9,7 +9,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 @st.cache_resource
-def load_dlib_detector_models():
+def load_detector_models():
     start = time.perf_counter()
 
     app = FaceAnalysis(
@@ -26,18 +26,18 @@ def load_dlib_detector_models():
     return app
 
 
-@st.cache_resource
+
 def check_face(img):
     start = time.perf_counter()
 
-    detector = load_dlib_detector_models()
+    detector = load_detector_models()
     faces = detector.get(img)
 
     print(f"Face Detection Time: {time.perf_counter() - start:.3f} sec")
     return faces
 
 
-@st.cache_resource
+
 def get_face_embeddings(image_np, faces):
     start = time.perf_counter()
 
@@ -49,10 +49,9 @@ def get_face_embeddings(image_np, faces):
     return embeddings
 
 
-@st.cache_resource
+
 def get_trained_model():
     start = time.perf_counter()
-
     x = []
     y = []
 
@@ -92,7 +91,7 @@ def train_classifier():
     return bool(model_data)
 
 
-@st.cache_resource
+
 def predict_attendance(class_image_np, faces):
     total_start = time.perf_counter()
 
