@@ -8,13 +8,15 @@ from src.pipline.face_pipeline import get_face_embeddings,train_classifier,check
 
 from src.screens.student_dashboard import student_dashboard
 from src.pipline.voice_pipeline import get_voice_embedding
+from src.components.auto_enroll_dialog import auto_enroll_dialog
+
 import time
 import numpy as np
 from PIL import Image
 
 
 
-def student_screen():
+def student_screen(join_code=None):
     screen_start = time.perf_counter()
     style_base_layout()
 
@@ -78,13 +80,18 @@ def student_screen():
                         st.session_state.student_data = student
                         st.toast(f"Welcome Back {student['name']}")
                         photo_src = None
-
-                        print(f"Total Login Flow: {time.perf_counter() - screen_start:.3f} sec")
-                        st.rerun()
-
+                        
+                        if join_code:
+                            auto_enroll_dialog(join_code)
+                        else:    
+                            print(f"Total Login Flow: {time.perf_counter() - screen_start:.3f} sec")
+                            st.rerun()
+                            
                 else:
                     st.info("Face not recognized!... You Might be new Student")
                     show_registration(img, num_faces)
+                    if join_code:
+                        auto_enroll_dialog(join_code)
 
 
 def show_registration(img, num_faces):

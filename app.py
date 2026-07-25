@@ -2,7 +2,6 @@ import streamlit as st # type:ignore
 from src.screens.home  import home_screen
 from src.screens.teacher  import teacher_screen
 from src.screens.student  import student_screen
-from src.components.auto_enroll_dialog import auto_enroll_dialog
 
 def main():
     st.set_page_config(
@@ -24,7 +23,7 @@ def main():
         case "teacher":
             teacher_screen()
         case "student":
-            student_screen()
+            student_screen(join_code)
         case _:
             home_screen()
 
