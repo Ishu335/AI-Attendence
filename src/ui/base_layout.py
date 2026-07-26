@@ -9,6 +9,7 @@ def style_backgroud_home():
             background-color: #EBEEFD !important;
             padding: 2.5rem !important;
             border-radius: 2rem !important;
+            height:350px;
         }
         </style>
     """,unsafe_allow_html=True)
