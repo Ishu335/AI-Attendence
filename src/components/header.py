@@ -1,4 +1,4 @@
-import streamlit as st #type:ignore
+import streamlit as st  # type:ignore
 import base64
 
 
@@ -10,9 +10,11 @@ def get_base64(image_path):
 def header_home():
 
     logo = get_base64("img/logo.png")
+
     st.markdown("""
     <style>
 
+    /* Reduce Streamlit top padding */
     .block-container{
         padding-top:0rem !important;
     }
@@ -23,59 +25,59 @@ def header_home():
         align-items:center;
         gap:20px;
         width:100%;
-        margin-bottom:20px; /* Increase bottom space */
+
+        margin-top:-15px;      /* Move header upward */
+        margin-bottom:60px;    /* Increase bottom spacing */
     }
 
     .logo-img img{
-    width:100px;
-    height:100px;
-    display:block;
-    border-radius:20%;
-    object-fit:cover;
-}
+        width:100px;
+        height:100px;
+        display:block;
+        object-fit:cover;
+        border-radius:20%;
+    }
 
     .title-container{
         display:flex;
         flex-direction:column;
         justify-content:center;
+        align-items:flex-start;
+        gap:0;
     }
 
-   .main-title{
-    margin:0;
-    padding:0;
-    line-height:1;
-    font-size:2rem;
-    font-weight:800;   /* not 850px */
+    .main-title{
+        margin:0;
+        padding:0;
+        line-height:1;
+        font-size:2.6rem;
+        font-weight:800;
+        white-space:nowrap;
 
-    white-space:nowrap;    /* Keep text on one line */
-    overflow:hidden;
+        background:linear-gradient(
+            90deg,
+            #60A5FA,
+            #22D3EE,
+            #A78BFA
+        );
 
-    background:linear-gradient(
-        90deg,
-        #60A5FA,
-        #22D3EE,
-        #A78BFA
-    );
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-clip:text;
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-    display:inline-block;
-}
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+        display:inline-block;
+        margin-bottom:-6px;
     }
 
     .sub-title{
+        margin:0;
+        padding:0;
         color:#C7D2FE;
-        margin:0 !important;
-        padding:0 !important;
-        line-height:1.2;
-        font-size:1.1rem;
-        letter-spacing:1px;
-        text-align:left;
+        font-size:1rem;
+        font-weight:500;
+        line-height:1;
+        letter-spacing:.6px;
+        margin-top:-2px;
     }
 
     </style>
@@ -88,18 +90,16 @@ def header_home():
         </div>
         <div class="title-container">
             <h1 class="main-title">VisionVoice</h1>
-            <p class="sub-title">
-                Smart Attendance Management System
-            </p>
+            <p class="sub-title">Smart Attendance Management System</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 
-
 def header_dashboard():
 
     logo = get_base64("img/logo.png")
+
     st.markdown("""
     <style>
 
@@ -111,55 +111,60 @@ def header_dashboard():
         display:flex;
         justify-content:center;
         align-items:center;
-        gap:20px;
+        gap:16px;
         width:100%;
-        margin-bottom:20px; /* Increase bottom space */
+
+        margin-top:-10px;      /* Reduce top gap */
+        margin-bottom:40px;    /* Increase bottom gap */
     }
 
     .logo-img img{
-    width:70px;
-    height:70px;
-    display:block;
-    border-radius:20%;
-    object-fit:cover;
-}
+        width:70px;
+        height:70px;
+        display:block;
+        object-fit:cover;
+        border-radius:20%;
+    }
 
     .title-container{
         display:flex;
         flex-direction:column;
         justify-content:center;
+        align-items:flex-start;
+        gap:0;
     }
 
     .main-title{
-    margin:0 !important;
-    padding:0 !important;
-    line-height:1.1;
+        margin:0;
+        padding:0;
+        line-height:1;
+        font-size:3rem;
+        font-weight:800;
 
-    font-size:3rem;
-    font-weight:700;
+        background:linear-gradient(
+            90deg,
+            #60A5FA,
+            #22D3EE,
+            #A78BFA
+        );
 
-    background:linear-gradient(
-        90deg,
-        #60A5FA,
-        #22D3EE,
-        #A78BFA
-    );
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-clip:text;
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-    display:inline-block;
-}
+        display:inline-block;
+        margin-bottom:-8px;
+    }
 
     .sub-title{
+        margin:0;
+        padding:0;
         color:#C7D2FE;
-        margin:0 !important;
-        padding:0 !important;
-        line-height:0.5;
-        font-size:0.6 rem;
-        letter-spacing:1px;
-        text-align:left;
+        font-size:.75rem;
+        font-weight:500;
+        line-height:1;
+        letter-spacing:.6px;
+        margin-top:-2px;
     }
 
     </style>
@@ -167,15 +172,12 @@ def header_dashboard():
 
     st.markdown(f"""
     <div class="header-wrapper">
-        <div class="logo-img">  
+        <div class="logo-img">
             <img src="data:image/png;base64,{logo}">
         </div>
         <div class="title-container">
             <h1 class="main-title">VisionVoice</h1>
-            <p class="sub-title">
-                Smart Attendance Management System
-            </p>
+            <p class="sub-title">Smart Attendance Management System</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
-
