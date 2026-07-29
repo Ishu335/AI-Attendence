@@ -1,6 +1,7 @@
 streamlit # For building the web application
 numpy 
 pandas
+opencv-python
 
 # Face Recognition 
 scikit-learn # For SVM
