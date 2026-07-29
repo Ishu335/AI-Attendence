@@ -11,53 +11,53 @@ streamlit==1.50.0          # Web application framework
 # ----------------------------
 # Numerical Computing
 # ----------------------------
-numpy==1.26.4              # Array and mathematical operations
-pandas==2.2.3              # Data analysis and tabular data handling
+numpy==1.26.4              # Compatible with InsightFace
+pandas==2.2.3              # Data analysis
 
 # ----------------------------
 # Computer Vision
 # ----------------------------
-opencv-python-headless==4.10.0.84   # OpenCV (recommended for Streamlit/servers)
+opencv-python-headless==4.10.0.84   # OpenCV for server environments
 
 # ----------------------------
 # Machine Learning
 # ----------------------------
-scikit-learn==1.6.1        # Similarity calculations and ML utilities
+scikit-learn==1.6.1
 
 # ----------------------------
 # Face Recognition
 # ----------------------------
-dlib-bin==20.0.0           # Face detection support
-insightface==0.7.3         # Face recognition model
-onnxruntime==1.22.1        # Runs InsightFace ONNX models
+dlib-bin==20.0.0
+insightface==0.7.3
+onnxruntime==1.22.1
 
 # ----------------------------
 # Image Processing
 # ----------------------------
-Pillow==11.1.0             # Image loading and processing
+Pillow==11.1.0
 
 # ----------------------------
 # Voice Recognition
 # ----------------------------
-librosa==0.10.2.post1      # Audio preprocessing
-resemblyzer==0.1.4         # Speaker embedding generation
+librosa==0.10.2.post1
+resemblyzer==0.1.4
 
 # ----------------------------
 # Database
 # ----------------------------
-supabase==2.31.0           # Supabase client
+supabase==2.31.0
 
 # ----------------------------
 # Security
 # ----------------------------
-bcrypt==4.2.1              # Password hashing
+bcrypt==4.2.1
 
 # ----------------------------
-# QR Code Generator
+# QR Code Generation
 # ----------------------------
-segno==1.6.6               # QR code generation
+segno==1.6.6
 
 # ----------------------------
 # Build Tools
 # ----------------------------
-setuptools>=70             # Required by some packages during installation
+setuptools>=70
