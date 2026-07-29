@@ -1,32 +1,63 @@
-streamlit # For building the web application
-numpy 
-pandas
-opencv-python
+# =============================================================================
+# VisionVoice - AI Smart Attendance Management System
+# requirements.txt
+# =============================================================================
 
-# Face Recognition 
-scikit-learn # For SVM
-dlib-bin # For face detection and recognition
+# ----------------------------
+# Streamlit Web Application
+# ----------------------------
+streamlit==1.50.0          # Web application framework
 
+# ----------------------------
+# Numerical Computing
+# ----------------------------
+numpy==1.26.4              # Array and mathematical operations
+pandas==2.2.3              # Data analysis and tabular data handling
 
-setuptools # For installing  face_recognition models for compatibility with python
-# A separate lightweight window that behaves like a browser but stays next to VS Code?
-#database
-supabase # For Supabase database interaction
+# ----------------------------
+# Computer Vision
+# ----------------------------
+opencv-python-headless==4.10.0.84   # OpenCV (recommended for Streamlit/servers)
 
-bcrypt # For password hashing
-segno # For JWT token generation and verification and generate QR 
-pillow # For image processing
+# ----------------------------
+# Machine Learning
+# ----------------------------
+scikit-learn==1.6.1        # Similarity calculations and ML utilities
 
+# ----------------------------
+# Face Recognition
+# ----------------------------
+dlib-bin==20.0.0           # Face detection support
+insightface==0.7.3         # Face recognition model
+onnxruntime==1.22.1        # Runs InsightFace ONNX models
 
-#for Voice Pipeline
-librosa # For audio processing
-resemblyzer # For voice embedding and speaker recognition
+# ----------------------------
+# Image Processing
+# ----------------------------
+Pillow==11.1.0             # Image loading and processing
 
+# ----------------------------
+# Voice Recognition
+# ----------------------------
+librosa==0.10.2.post1      # Audio preprocessing
+resemblyzer==0.1.4         # Speaker embedding generation
 
-# moden model 
-insightface
-onnxruntime
+# ----------------------------
+# Database
+# ----------------------------
+supabase==2.31.0           # Supabase client
 
+# ----------------------------
+# Security
+# ----------------------------
+bcrypt==4.2.1              # Password hashing
 
+# ----------------------------
+# QR Code Generator
+# ----------------------------
+segno==1.6.6               # QR code generation
 
-# visionvoice-ai-main.streamlit.app  : -> domain name is used for hosting the application on Streamlit Cloud.
+# ----------------------------
+# Build Tools
+# ----------------------------
+setuptools>=70             # Required by some packages during installation
