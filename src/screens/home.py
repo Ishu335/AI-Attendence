@@ -55,7 +55,8 @@ def home_screen():
             </div>
             """, unsafe_allow_html=True)
         st.write("")
-        if st.button("Teacher Portal",icon=":material/arrow_outward:",icon_position='right'):
+        # if st.button("Teacher Portal",icon=":material/arrow_outward:",icon_position='right'):
+        if st.button("Teacher Portal",icon=":material/arrow_outward:"):
             st.session_state['login_state']='teacher'
             st.rerun()
     
