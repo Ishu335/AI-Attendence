@@ -1,63 +1,27 @@
-# =============================================================================
-# VisionVoice - AI Smart Attendance Management System
-# requirements.txt
-# =============================================================================
+streamlit==1.50.0
 
-# ----------------------------
-# Streamlit Web Application
-# ----------------------------
-streamlit==1.50.0          # Web application framework
+numpy==1.26.4
+pandas==2.2.3
 
-# ----------------------------
-# Numerical Computing
-# ----------------------------
-numpy==1.26.4              # Compatible with InsightFace
-pandas==2.2.3              # Data analysis
+opencv-python-headless==4.10.0.84
 
-# ----------------------------
-# Computer Vision
-# ----------------------------
-opencv-python-headless==4.10.0.84   # OpenCV for server environments
-
-# ----------------------------
-# Machine Learning
-# ----------------------------
 scikit-learn==1.6.1
 
-# ----------------------------
-# Face Recognition
-# ----------------------------
 dlib-bin==20.0.0
 insightface==0.7.3
+onnx==1.17.0
 onnxruntime==1.22.1
+ml-dtypes==0.5.3
 
-# ----------------------------
-# Image Processing
-# ----------------------------
 Pillow==11.1.0
 
-# ----------------------------
-# Voice Recognition
-# ----------------------------
 librosa==0.10.2.post1
 resemblyzer==0.1.4
 
-# ----------------------------
-# Database
-# ----------------------------
 supabase==2.31.0
 
-# ----------------------------
-# Security
-# ----------------------------
 bcrypt==4.2.1
 
-# ----------------------------
-# QR Code Generation
-# ----------------------------
 segno==1.6.6
 
-# ----------------------------
-# Build Tools
-# ----------------------------
 setuptools>=70
