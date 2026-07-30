@@ -97,7 +97,7 @@ def home_screen():
                     </div>
                     """, unsafe_allow_html=True)
         st.write('')
-        if st.button("Student Portal",icon=":material/arrow_outward:",icon_position="right"):
+        if st.button("Student Portal",icon=":material/arrow_outward:"):
             st.session_state['login_state'] = 'student'
             st.rerun()
     footer_home()
